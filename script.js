@@ -1,43 +1,43 @@
 let humanScore = 0;
 let computerScore = 0;
-let currentRoundNumber = 1;
+let currentRoundNumber = 0;
 
-// Write your code below:
-let generateTarget = () => {
+const generateTarget = () => {
   return Math.floor(Math.random() * 10)
 }
-console.log(generateTarget())      
+// const getAbsoluteDistance = () => {
+
+// }
 
 let compareGuesses = (humanGuess, computerGuess, targetNumber) => {
-  if(humanGuess == computerGuess){
-    return true;
-  } else if (humanGuess < computerGuess && targetNumber < humanGuess){
-    return true;
-  } else if(computerGuess < humanGuess && targetNumber < humanGuess) {
-    return false;
-  } else if(computerGuess > humanGuess && targetNumber > computerGuess){
-    return false;
-  } else if(computerGuess < humanGuess && targetNumber > humanGuess){
-    return true;
-  } else if (computerGuess > humanGuess && computerGuess > targetNumber) {
-    return false;
-  } else if (humanGuess > computerGuess && humanGuess > targetNumber) {
-    return true;
+  let userdifference =  Math.abs(humanGuess - targetNumber)
+  let computerdifference = Math.abs(computerGuess - targetNumber)
+  
+  if(humanGuess < 0 || humanGuess > 9){
+    alert('Please input a number greater or equal to 0 and less than 10.')
+  } else {
+    switch(true){
+      case userdifference > computerdifference:
+        return false;
+      case userdifference < computerdifference || userdifference == computerdifference:
+        return true;
+    }
   }
+ 
+
+ 
 }
 
-let updateScore = (str) => {
-if(str == 'human'){
-  humanScore+=1
-}else if(str == 'computer'){
-  computerScore +=1
+const updateScore = (str) => {
+switch(true){
+  case str == 'human':
+  humanScore++;
+  break;
+  default:
+  computerScore++;
 }
 }
 
-let advanceRound = () => {
-  currentRoundNumber += 1
+function advanceRound(){
+  currentRoundNumber++
 }
-// let output1 = compareGuesses(4, 3, 2)
-// console.log(output1)                
-// advanceRound()
-// console.log(currentRoundNumber)
